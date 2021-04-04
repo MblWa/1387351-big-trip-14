@@ -4,11 +4,18 @@ import {createInfoPriceTemplate} from './view/info-price.js';
 import {createInfoRouteTemplate} from './view/info-route.js';
 import {createPointsSortTemplate} from './view/points-sort.js';
 import {createPointsListTemplate} from './view/points-list.js';
-import {createPointCreatorTemplate} from './view/point-creator.js';
-import {createPointEditorTemplate} from './view/point-editor.js';
+import {createPointFormTemplate} from './view/point-form.js';
 import {createPointTemplate} from './view/point.js';
 
 const POINT_COUNT = 3;
+const PointFormMode = {
+  edit: {
+    mode: 'edit',
+  },
+  add: {
+    mode: 'add',
+  },
+};
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -33,10 +40,10 @@ render(siteEvents, createPointsSortTemplate(), 'beforeend');
 render(siteEvents, createPointsListTemplate(),'beforeend');
 
 const siteEventsList = siteMain.querySelector('.trip-events__list');
-render(siteEventsList, createPointCreatorTemplate(), 'beforeend');
+render(siteEventsList, createPointFormTemplate(PointFormMode.add), 'beforeend');
 
 for (let i = 0; i < POINT_COUNT; i++) {
   render(siteEventsList, createPointTemplate(), 'beforeend');
 }
 
-render(siteEventsList, createPointEditorTemplate(), 'beforeend');
+render(siteEventsList, createPointFormTemplate(PointFormMode.edit), 'beforeend');
