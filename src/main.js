@@ -6,8 +6,10 @@ import {createPointsSortTemplate} from './view/points-sort.js';
 import {createPointsListTemplate} from './view/points-list.js';
 import {createPointFormTemplate} from './view/point-form.js';
 import {createPointTemplate} from './view/point.js';
+import {generatePoint} from './mock/point.js';
+import {sortByDate} from './mock/sort.js';
 
-const POINT_COUNT = 3;
+const POINT_COUNT = 15;
 const PointFormMode = {
   edit: {
     mode: 'edit',
@@ -16,6 +18,9 @@ const PointFormMode = {
     mode: 'add',
   },
 };
+
+const points = new Array(POINT_COUNT).fill().map(generatePoint);
+sortByDate(points);
 
 const render = (container, template, place) => {
   container.insertAdjacentHTML(place, template);
@@ -26,13 +31,13 @@ const siteMenu = siteHeader.querySelector('.trip-controls__navigation');
 render(siteMenu, createSiteMenuTemplate(), 'beforeend');
 
 const siteFilter = siteHeader.querySelector('.trip-controls__filters');
-render(siteFilter, createSiteFilterTemplate(), 'beforeend');
+render(siteFilter, createSiteFilterTemplate(points), 'beforeend');
 
 const siteInfo = siteHeader.querySelector('.trip-main');
-render(siteInfo, createInfoRouteTemplate(), 'afterbegin');
+render(siteInfo, createInfoRouteTemplate(points), 'afterbegin');
 
 const siteInfoRoute = siteHeader.querySelector('.trip-info');
-render(siteInfoRoute, createInfoPriceTemplate(), 'beforeend');
+render(siteInfoRoute, createInfoPriceTemplate(points), 'beforeend');
 
 const siteMain = document.querySelector('.page-main');
 const siteEvents = siteMain.querySelector('.trip-events');
@@ -42,8 +47,8 @@ render(siteEvents, createPointsListTemplate(),'beforeend');
 const siteEventsList = siteMain.querySelector('.trip-events__list');
 render(siteEventsList, createPointFormTemplate(PointFormMode.add), 'beforeend');
 
-for (let i = 0; i < POINT_COUNT; i++) {
-  render(siteEventsList, createPointTemplate(), 'beforeend');
+for (let i = 1; i < POINT_COUNT; i++) {
+  render(siteEventsList, createPointTemplate(points[i]), 'beforeend');
 }
 
-render(siteEventsList, createPointFormTemplate(PointFormMode.edit), 'beforeend');
+render(siteEventsList, createPointFormTemplate(PointFormMode.edit, points[0]), 'beforeend');
