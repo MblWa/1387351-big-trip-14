@@ -9,8 +9,8 @@ const PHOTOS_MAXIMUM = 5;
 const PLACEHOLDER_COUNT_MAXIMUM = 10000;
 const PLACEHOLDER_IMG_URL = 'http://picsum.photos/248/152?r=';
 
-const getRandomDescription = (descriptionString) => {
-  const sentences = descriptionString.split('. ');
+const getRandomDescription = (descriptionText) => {
+  const sentences = descriptionText.split('. ');
   const lowerBound = sentences.length < SENTENCES_MINIMUM
     ? sentences.length
     : SENTENCES_MINIMUM;

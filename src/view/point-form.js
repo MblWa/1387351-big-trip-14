@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import {POINT_AND_OFFER_TYPES, DESTINATION_CITIES} from '../mock/variables.js';
 import {capitalize} from '../mock/util.js';
-
+import {PointFormMode} from '../main.js';
 const generatePointTypeList = (currentType) => {
   let pointTypesList = '';
 
@@ -16,13 +16,13 @@ const generatePointTypeList = (currentType) => {
 };
 
 const generateDestinationCityOptions = () => {
-  let optionsString = '';
+  let optionsText = '';
 
   DESTINATION_CITIES.forEach((item) => {
-    optionsString += `<option value=${item}></option>`;
+    optionsText += `<option value=${item}></option>`;
   });
 
-  return optionsString;
+  return optionsText;
 };
 
 const generateOffersSection = (offers) => {
@@ -30,7 +30,7 @@ const generateOffersSection = (offers) => {
     return '';
   }
 
-  const offerString = offers.map(({ name, title, price, isSelected }) => (
+  const offerText = offers.map(({ name, title, price, isSelected }) => (
     `<div class="event__offer-selector">
       <input class="event__offer-checkbox  visually-hidden" id="event-offer-${name}-1" type="checkbox" name="event-offer-${name}" ${isSelected ? 'checked' : ''}>
         <label class="event__offer-label" for="event-offer-${name}-1">
@@ -45,7 +45,7 @@ const generateOffersSection = (offers) => {
     `<section class="event__section  event__section--offers">
       <h3 class="event__section-title  event__section-title--offers">Offers</h3>
       <div class="event__available-offers">
-        ${offerString}
+        ${offerText}
       </div>
     </section>`
   );
@@ -76,7 +76,7 @@ const generateDestinationSection = (destination) => {
   );
 };
 
-export const createPointFormTemplate = ({ mode }, point = {}) => {
+export const createPointFormTemplate = (mode, point = {}) => {
   const deleteButton = 'Delete';
   const cancelButton = 'Cancel';
   const rollupButton = `<button class="event__rollup-btn" type="button">
@@ -138,9 +138,9 @@ export const createPointFormTemplate = ({ mode }, point = {}) => {
 
         <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
         <button class="event__reset-btn" type="reset">
-          ${mode === 'add' ? cancelButton : deleteButton}
+          ${mode === PointFormMode.ADD ? cancelButton : deleteButton}
         </button>
-        ${mode === 'edit' ? rollupButton : ''}
+        ${mode === PointFormMode.EDIT ? rollupButton : ''}
       </header>
       <section class="event__details">
       ${generateOffersSection(offers)}

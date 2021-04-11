@@ -19,6 +19,6 @@ export const shuffleArray = (inputArray) => {
   return shallowCopy;
 };
 
-export const capitalize = (inputString) => {
-  return inputString && inputString[0].toUpperCase() + inputString.slice(1);
+export const capitalize = (inputText) => {
+  return inputText && inputText[0].toUpperCase() + inputText.slice(1);
 };

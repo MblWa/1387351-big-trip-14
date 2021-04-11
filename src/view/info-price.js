@@ -1,14 +1,9 @@
 const calculatePrice = (points) => {
-  let routePrice = 0;
-
-  points.forEach(({ price, offers }) => {
-    routePrice += price;
-    offers.forEach(({price, isSelected}) => {
-      routePrice += isSelected ? price : 0;
-    });
-  });
-
-  return routePrice;
+  return points.reduce((routePrice, { price, offers }) => {
+    return routePrice + price + offers.reduce((offerPrice, {price, isSelected}) => {
+      return offerPrice + isSelected ? price : 0;
+    }, 0);
+  }, 0);
 };
 
 export const createInfoPriceTemplate = (points) => (

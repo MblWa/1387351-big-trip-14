@@ -5,7 +5,7 @@ const convertRoute = (points) => {
     return { route: '', date: '' };
   }
 
-  const routePoints = new Set;
+  const routePoints = new Set();
   const startDate = points[0].startTime;
   let endDate = points[0].endTime;
 
@@ -15,7 +15,7 @@ const convertRoute = (points) => {
   });
 
   const routeArray = [...routePoints];
-  const formattedTimeString = `${dayjs(startDate).format('MMM D')}&nbsp;&mdash;&nbsp;${
+  const formattedTimeText = `${dayjs(startDate).format('MMM D')} — ${
     dayjs(startDate).get('M') !== dayjs(endDate).get('M')
       ? dayjs(endDate).format('MMM D')
       : dayjs(endDate).format('D')
@@ -23,9 +23,9 @@ const convertRoute = (points) => {
 
   return {
     route: routeArray.length > 3
-      ? `${routeArray[0]} &mdash; ... &mdash; ${routeArray[routeArray.length - 1]}`
-      : routeArray.join(' &mdash '),
-    date: formattedTimeString,
+      ? `${routeArray[0]} — ... — ${routeArray[routeArray.length - 1]}`
+      : routeArray.join(' — '),
+    date: formattedTimeText,
   };
 };
 

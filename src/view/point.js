@@ -1,11 +1,9 @@
 import dayjs from 'dayjs';
 import {capitalize} from '../mock/util.js';
 
-const formatDateString = (time, formatString) => {
+const formatDateText = (time, formatText) => {
   return time !== 0
-    ? `${time < 10
-      ? `0${time}`
-      : time}${formatString} `
+    ? `${time.toString().padStart(2, '0')}${formatText}`
     : '';
 };
 
@@ -14,9 +12,11 @@ const calculateDuration = (startTime, endTime) => {
   const hour = Math.floor(dayjs(endTime).diff(startTime, 'h') % 24);
   const minute = Math.floor(dayjs(endTime).diff(startTime, 'm') % 60);
 
-  return formatDateString(day, 'D')
-    + formatDateString(hour, 'H')
-    + formatDateString(minute, 'm');
+  return [
+    formatDateText(day, 'D'),
+    formatDateText(hour, 'H'),
+    formatDateText(minute, 'm'),
+  ].join(' ');
 };
 
 const addToFavourite = (isFavourite) => (
@@ -30,7 +30,7 @@ const createOffersTemplate = (offers) => {
     return '';
   }
 
-  const offerString = offers.map(({ title, price, isSelected }) => (
+  const offerText = offers.map(({ title, price, isSelected }) => (
     isSelected
       ? `<li class="event__offer">
         <span class="event__offer-title">${title}</span>
@@ -41,23 +41,23 @@ const createOffersTemplate = (offers) => {
   ).join('');
 
   return `<ul class="event__selected-offers">
-      ${offerString}
+      ${offerText}
     </ul>`;
 };
 
 export const createPointTemplate = ({ startTime, endTime, isFavourite, type, price, destinationCity, offers }) => (
   `<li class="trip-events__item">
     <div class="event">
-      <time class="event__date" datetime="${startTime}">${dayjs(startTime).format('MMM D')}</time>
+      <time class="event__date" datetime="${startTime.toISOString()}">${dayjs(startTime).format('MMM D')}</time>
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
       <h3 class="event__title">${capitalize(type)} ${destinationCity}</h3>
       <div class="event__schedule">
         <p class="event__time">
-          <time class="event__start-time" datetime="${startTime}">${dayjs(startTime).format('HH:mm')}</time>
+          <time class="event__start-time" datetime="${startTime.toISOString()}">${dayjs(startTime).format('HH:mm')}</time>
           &mdash;
-          <time class="event__end-time" datetime="${endTime}">${dayjs(endTime).format('HH:mm')}</time>
+          <time class="event__end-time" datetime="${endTime.toISOString()}">${dayjs(endTime).format('HH:mm')}</time>
         </p>
         <p class="event__duration">${calculateDuration(startTime, endTime)}</p>
       </div>

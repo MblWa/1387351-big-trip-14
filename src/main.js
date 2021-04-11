@@ -10,13 +10,9 @@ import {generatePoint} from './mock/point.js';
 import {sortByDate} from './mock/sort.js';
 
 const POINT_COUNT = 15;
-const PointFormMode = {
-  edit: {
-    mode: 'edit',
-  },
-  add: {
-    mode: 'add',
-  },
+export const PointFormMode = {
+  EDIT: 'EDIT',
+  ADD: 'ADD',
 };
 
 const points = new Array(POINT_COUNT).fill().map(generatePoint);
@@ -45,10 +41,10 @@ render(siteEvents, createPointsSortTemplate(), 'beforeend');
 render(siteEvents, createPointsListTemplate(),'beforeend');
 
 const siteEventsList = siteMain.querySelector('.trip-events__list');
-render(siteEventsList, createPointFormTemplate(PointFormMode.add), 'beforeend');
+render(siteEventsList, createPointFormTemplate(PointFormMode.ADD), 'beforeend');
 
 for (let i = 1; i < POINT_COUNT; i++) {
   render(siteEventsList, createPointTemplate(points[i]), 'beforeend');
 }
 
-render(siteEventsList, createPointFormTemplate(PointFormMode.edit, points[0]), 'beforeend');
+render(siteEventsList, createPointFormTemplate(PointFormMode.EDIT, points[0]), 'beforeend');
