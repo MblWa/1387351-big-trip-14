@@ -1,5 +1,7 @@
 import dayjs from 'dayjs';
 
+const ROUTE_POINTS_COUNT = 3;
+
 const convertRoute = (points) => {
   if (points.length === 0) {
     return { route: '', date: '' };
@@ -14,7 +16,7 @@ const convertRoute = (points) => {
     endDate = endDate < endTime ? endTime : endDate;
   });
 
-  const routeArray = [...routePoints];
+  const wayPoints = [...routePoints];
   const formattedTimeText = `${dayjs(startDate).format('MMM D')} — ${
     dayjs(startDate).get('M') !== dayjs(endDate).get('M')
       ? dayjs(endDate).format('MMM D')
@@ -22,9 +24,9 @@ const convertRoute = (points) => {
   }`;
 
   return {
-    route: routeArray.length > 3
-      ? `${routeArray[0]} — ... — ${routeArray[routeArray.length - 1]}`
-      : routeArray.join(' — '),
+    route: wayPoints.length > ROUTE_POINTS_COUNT
+      ? `${wayPoints[0]} — ... — ${wayPoints[wayPoints.length - 1]}`
+      : wayPoints.join(' — '),
     date: formattedTimeText,
   };
 };

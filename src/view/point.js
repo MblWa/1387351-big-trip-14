@@ -1,16 +1,20 @@
 import dayjs from 'dayjs';
 import {capitalize} from '../util.js';
 
+const HOURS_IN_DAY = 24;
+const MINUTES_IN_HOUR = 60;
+const PADDING = 2;
+
 const formatDateText = (time, formatText) => {
   return time !== 0
-    ? `${time.toString().padStart(2, '0')}${formatText}`
+    ? `${time.toString().padStart(PADDING, '0')}${formatText}`
     : '';
 };
 
 const calculateDuration = (startTime, endTime) => {
   const day = Math.floor(dayjs(endTime).diff(startTime, 'd'));
-  const hour = Math.floor(dayjs(endTime).diff(startTime, 'h') % 24);
-  const minute = Math.floor(dayjs(endTime).diff(startTime, 'm') % 60);
+  const hour = Math.floor(dayjs(endTime).diff(startTime, 'h') % HOURS_IN_DAY);
+  const minute = Math.floor(dayjs(endTime).diff(startTime, 'm') % MINUTES_IN_HOUR);
 
   return [
     formatDateText(day, 'D'),

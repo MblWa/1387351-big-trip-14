@@ -24,7 +24,7 @@ const siteMenu = siteHeader.querySelector('.trip-controls__navigation');
 render(siteMenu, createSiteMenuTemplate(), 'beforeend');
 
 const siteFilter = siteHeader.querySelector('.trip-controls__filters');
-render(siteFilter, createSiteFilterTemplate(points), 'beforeend');
+render(siteFilter, createSiteFilterTemplate(), 'beforeend');
 
 const siteInfo = siteHeader.querySelector('.trip-main');
 render(siteInfo, createInfoRouteTemplate(points), 'afterbegin');
