@@ -1,5 +1,5 @@
 import dayjs from 'dayjs';
-import {capitalize} from '../mock/util.js';
+import {capitalize} from '../util.js';
 
 const formatDateText = (time, formatText) => {
   return time !== 0

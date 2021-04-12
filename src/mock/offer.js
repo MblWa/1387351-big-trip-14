@@ -1,5 +1,5 @@
 import {POINT_AND_OFFER_TYPES} from './variables.js';
-import {getRandomInteger, shuffleArray} from './util.js';
+import {getRandomInteger, shuffleArray} from '../util.js';
 
 const OFFER_TITLES = [
   { name: 'luggage', title: 'Add luggage' },

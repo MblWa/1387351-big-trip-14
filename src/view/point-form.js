@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import {POINT_AND_OFFER_TYPES, DESTINATION_CITIES} from '../mock/variables.js';
-import {capitalize} from '../mock/util.js';
-import {PointFormMode} from '../main.js';
+import {capitalize, PointFormMode} from '../util.js';
+
 const generatePointTypeList = (currentType) => {
   let pointTypesList = '';
 

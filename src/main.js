@@ -8,12 +8,9 @@ import {createPointFormTemplate} from './view/point-form.js';
 import {createPointTemplate} from './view/point.js';
 import {generatePoint} from './mock/point.js';
 import {sortByDate} from './mock/sort.js';
+import {PointFormMode} from './util.js';
 
 const POINT_COUNT = 15;
-export const PointFormMode = {
-  EDIT: 'EDIT',
-  ADD: 'ADD',
-};
 
 const points = new Array(POINT_COUNT).fill().map(generatePoint);
 sortByDate(points);
